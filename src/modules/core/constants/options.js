@@ -1,3 +1,5 @@
+import React from "react";
+
 export const logo = (
   <svg
     width="160"
@@ -110,4 +112,4 @@ export const logo = (
       </clipPath>
     </defs>
   </svg>
-)
+);

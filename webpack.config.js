@@ -1,27 +1,27 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env) => {
   const clientBundleConfig = {
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
       fallback: {
-        crypto: require.resolve('crypto-browserify'),
-        stream: require.resolve('stream-browserify'),
+        crypto: require.resolve("crypto-browserify"),
+        stream: require.resolve("stream-browserify"),
       },
     },
-    mode: 'development',
+    mode: "development",
     module: {
       rules: [
         {
           test: /\.jsx?$/,
-          loader: 'babel-loader',
+          loader: "babel-loader",
           exclude: /(node_modules|bower_components|public\/)/,
         },
         {
           test: /\.tsx?$/,
-          loader: 'ts-loader',
+          loader: "ts-loader",
           exclude: /(node_modules|bower_components|public\/)/,
         },
         {
@@ -29,14 +29,14 @@ module.exports = (env) => {
           use: [
             MiniCssExtractPlugin.loader,
             {
-              loader: 'css-loader',
+              loader: "css-loader",
               options: {
                 sourceMap: true,
                 url: false,
               },
             },
             {
-              loader: 'less-loader',
+              loader: "less-loader",
               options: {
                 lessOptions: {
                   javascriptEnabled: true,
@@ -50,29 +50,29 @@ module.exports = (env) => {
           use: [
             MiniCssExtractPlugin.loader,
             {
-              loader: 'css-loader',
+              loader: "css-loader",
               options: {
                 sourceMap: true,
                 url: false,
               },
             },
             {
-              loader: 'sass-loader',
+              loader: "sass-loader",
             },
           ],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/i,
-          type: 'asset',
+          type: "asset",
           generator: {
-            filename: 'fonts/[name][ext][query]',
+            filename: "fonts/[name][ext][query]",
           },
         },
         {
           test: [/\.svg$/, /\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-          type: 'asset',
+          type: "asset",
           generator: {
-            filename: 'images/[name][ext][query]',
+            filename: "images/[name][ext][query]",
           },
         },
       ],
@@ -81,18 +81,18 @@ module.exports = (env) => {
       children: true,
     },
     entry: {
-      index: './src/index.jsx',
+      index: "./src/index.jsx",
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebPackPlugin({
-        template: './public/index.html',
-        filename: './index.html',
+        template: "./public/index.html",
+        filename: "./index.html",
       }),
       new MiniCssExtractPlugin({
-        filename: 'css/[name].bundle.css',
+        filename: "css/[name].bundle.css",
       }),
     ],
-  }
-  return [clientBundleConfig]
-}
+  };
+  return [clientBundleConfig];
+};
