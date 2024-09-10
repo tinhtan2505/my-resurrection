@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require("path");
 
 module.exports = (env) => {
   const clientBundleConfig = {
@@ -27,23 +28,12 @@ module.exports = (env) => {
         {
           test: /\.less$/,
           use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: true,
-                url: false,
-              },
-            },
-            {
-              loader: "less-loader",
-              options: {
-                lessOptions: {
-                  javascriptEnabled: true,
-                },
-              },
-            },
+            "style-loader", // Tạo thẻ <style> trong HTML
+            "css-loader", // Đọc CSS từ file
+            "postcss-loader", // Chạy CSS qua PostCSS (bao gồm Tailwind)
+            "less-loader", // Biên dịch Less thành CSS
           ],
+          include: path.resolve(__dirname, "src"),
         },
         {
           test: /\.(sa|sc|c)ss$/,

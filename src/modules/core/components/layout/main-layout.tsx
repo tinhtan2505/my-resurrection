@@ -1,73 +1,74 @@
-import React, { useState } from 'react'
-import { Button, Layout } from 'antd'
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { logo } from '../../constants/options'
+import React, { useState } from "react";
+import { Button, Layout } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { logo } from "../../constants/options";
 
-const { Header, Footer, Sider, Content } = Layout
+const { Header, Footer, Sider, Content } = Layout;
 const headerStyle: React.CSSProperties = {
-  color: '#fff',
+  color: "#fff",
   height: 64,
   padding: 0,
-  lineHeight: '64px',
-  // backgroundColor: '#4096ff',
-}
+  lineHeight: "64px",
+  backgroundColor: "#4096ff",
+};
 
 const contentStyle: React.CSSProperties = {
-  textAlign: 'center',
+  textAlign: "center",
   minHeight: 120,
-  lineHeight: '120px',
-  color: '#fff',
-  // backgroundColor: '#0958d9',
-}
+  lineHeight: "120px",
+  color: "#fff",
+  backgroundColor: "#0958d9",
+};
 
 const siderStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  backgroundColor: '#1d1d1d',
-}
+  textAlign: "center",
+  color: "#fff",
+  backgroundColor: "#1d1d1d",
+};
 
 const footerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  // backgroundColor: '#4096ff',
-}
+  textAlign: "center",
+  color: "#fff",
+  backgroundColor: "#4096ff",
+};
 
 const layoutStyle = {
-  height: '100%',
-  overflow: 'hidden',
-  backgroundColor: 'transparent',
-}
+  height: "100%",
+  overflow: "hidden",
+};
 
 interface MainPageProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const MainPage: React.FC<MainPageProps> = ({ children }) => {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout style={layoutStyle}>
       <Sider width="280px" style={siderStyle} collapsed={collapsed}>
         <div className="logo">{logo}</div>
-        <div className="sider">SIDER</div>
+        <div className="sider pt-2">SIDER</div>
       </Sider>
-      {/* <Layout>
+      <Layout>
         <Header style={headerStyle}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
-              fontSize: '16px',
+              fontSize: "16px",
               width: 48,
               height: 64,
             }}
           />
         </Header>
         <Content style={contentStyle}>{children}</Content>
-        <Footer style={footerStyle}>Footer</Footer>
-      </Layout> */}
+        <Footer style={footerStyle}>
+          <div className="pl-2 text-green-400">Hello world!</div>
+        </Footer>
+      </Layout>
     </Layout>
-  )
-}
+  );
+};
 
-export default MainPage
+export default MainPage;

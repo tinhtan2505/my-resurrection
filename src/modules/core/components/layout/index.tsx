@@ -1,7 +1,7 @@
 import React, { Component, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
-import "./styles.less";
+import "./layout.less";
 import MainPage from "./main-layout";
 
 interface Props {}
@@ -21,18 +21,7 @@ class LayoutPage extends Component<Props, State> {
 
   constructor(props: Props, context: any) {
     super(props);
-    // const { location } = this.props;
-    // const options = qs.parse(location.search.replace('?', ''));
-    // this.state = {
-    //     loaded: props.account.loaded,
-    //     networkError: null,
-    //     sidebarOpen: false,
-    //     search: !!options.keyword == true && location.pathname == '/search' ? options.keyword : '',
-    //     isCustomer: isCustomers(context),
-    //     isSaler: isSalers(context),
-    //     modalUploadVisible: false,
-    //     listUploads: [],
-    // };
+
     this.routes = Object.values(routes);
   }
   render() {
