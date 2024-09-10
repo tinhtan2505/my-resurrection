@@ -1,10 +1,8 @@
-import HtmlWebPackPlugin from 'html-webpack-plugin'
-import MiniCssExtractPlugin, {
-  loader as _loader,
-} from 'mini-css-extract-plugin'
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-export default () => {
+module.exports = (env) => {
   const clientBundleConfig = {
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -27,17 +25,9 @@ export default () => {
           exclude: /(node_modules|bower_components|public\/)/,
         },
         {
-          test: /\.scss$/, // Apply this rule to .scss files
-          use: [
-            'style-loader', // Injects styles into DOM
-            'css-loader', // Translates CSS into CommonJS
-            'sass-loader', // Compiles Sass to CSS
-          ],
-        },
-        {
           test: /\.less$/,
           use: [
-            _loader,
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -58,7 +48,7 @@ export default () => {
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            _loader,
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -91,12 +81,12 @@ export default () => {
       children: true,
     },
     entry: {
-      index: './src/App/index.jsx',
+      index: './src/index.jsx',
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebPackPlugin({
-        template: './src/App/index.html',
+        template: './public/index.html',
         filename: './index.html',
       }),
       new MiniCssExtractPlugin({

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Layout } from 'antd'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-// import { logo } from "../../constants/options";
+import { logo } from '../../constants/options'
 
 const { Header, Footer, Sider, Content } = Layout
 const headerStyle: React.CSSProperties = {
@@ -9,7 +9,7 @@ const headerStyle: React.CSSProperties = {
   height: 64,
   padding: 0,
   lineHeight: '64px',
-  backgroundColor: '#4096ff',
+  // backgroundColor: '#4096ff',
 }
 
 const contentStyle: React.CSSProperties = {
@@ -17,24 +17,25 @@ const contentStyle: React.CSSProperties = {
   minHeight: 120,
   lineHeight: '120px',
   color: '#fff',
-  backgroundColor: '#0958d9',
+  // backgroundColor: '#0958d9',
 }
 
 const siderStyle: React.CSSProperties = {
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: '#1677ff',
+  backgroundColor: '#1d1d1d',
 }
 
 const footerStyle: React.CSSProperties = {
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: '#4096ff',
+  // backgroundColor: '#4096ff',
 }
 
 const layoutStyle = {
   height: '100%',
   overflow: 'hidden',
+  backgroundColor: 'transparent',
 }
 
 interface MainPageProps {
@@ -46,10 +47,10 @@ const MainPage: React.FC<MainPageProps> = ({ children }) => {
   return (
     <Layout style={layoutStyle}>
       <Sider width="280px" style={siderStyle} collapsed={collapsed}>
-        {/* <div className="logo">{logo}</div> */}
-        Sider
+        <div className="logo">{logo}</div>
+        <div className="sider">SIDER</div>
       </Sider>
-      <Layout>
+      {/* <Layout>
         <Header style={headerStyle}>
           <Button
             type="text"
@@ -64,7 +65,7 @@ const MainPage: React.FC<MainPageProps> = ({ children }) => {
         </Header>
         <Content style={contentStyle}>{children}</Content>
         <Footer style={footerStyle}>Footer</Footer>
-      </Layout>
+      </Layout> */}
     </Layout>
   )
 }

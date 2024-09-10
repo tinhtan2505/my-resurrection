@@ -2,7 +2,7 @@ import React, { Component, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { routes } from './routes'
 import MainPage from './main-layout.tsx'
-import './styles.scss'
+import './styles.less'
 
 interface Props {}
 
