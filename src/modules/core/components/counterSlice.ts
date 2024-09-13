@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../../app/store";
 
 // Định nghĩa kiểu cho state
 interface CounterState {
@@ -8,7 +9,7 @@ interface CounterState {
 // Khởi tạo giá trị ban đầu cho state
 const initialState: CounterState = {
   value: 0,
-};
+} as CounterState;
 
 // Tạo slice với các kiểu được chỉ định
 export const counterSlice = createSlice({
@@ -30,5 +31,7 @@ export const counterSlice = createSlice({
 
 // Action creators được tự động tạo cho mỗi reducer
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+
+export const selectCount = (state: RootState) => state.counter.value;
 
 export default counterSlice.reducer;
