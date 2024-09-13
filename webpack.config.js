@@ -71,7 +71,7 @@ module.exports = (env) => {
       children: true,
     },
     entry: {
-      index: "./src/index.jsx",
+      index: "./src/index.tsx",
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -83,6 +83,9 @@ module.exports = (env) => {
         filename: "css/[name].bundle.css",
       }),
     ],
+    devServer: {
+      historyApiFallback: true, // Serve index.html for all routes
+    },
   };
   return [clientBundleConfig];
 };

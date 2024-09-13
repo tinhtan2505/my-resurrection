@@ -1,47 +1,46 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, ComponentType, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
 import "./layout.less";
 import MainPage from "./main-layout";
+import { Home } from "../Home";
 
 interface Props {}
 
-interface State {
-  // state có thể được định nghĩa tại đây
+interface State {}
+
+interface RouteType {
+  path: string;
+  key: string;
+  component: ComponentType;
+  title: string;
+  showHeader: boolean;
 }
 
 class LayoutPage extends Component<Props, State> {
-  routes: {
-    path: string;
-    key: string;
-    component: () => React.JSX.Element;
-    title: string;
-    showHeader: boolean;
-  }[];
-
   constructor(props: Props, context: any) {
     super(props);
 
-    this.routes = Object.values(routes);
+    // this.routes = Object.values(routes);
   }
+  routes: RouteType[] = Object.values(routes);
+
   render() {
     return (
       <Suspense fallback={null}>
         <Routes>
-          {this.routes.map(
-            ({ path, key, component: Component, ...layoutProps }) => (
-              <Route
-                key={path}
-                path={path}
-                // exact={exact}
-                element={
-                  <MainPage>
-                    <Component />
-                  </MainPage>
-                }
-              />
-            )
-          )}
+          {this.routes?.map(({ path, key, component: Component }) => (
+            <Route
+              key={key}
+              path={path}
+              // exact={exact}
+              element={
+                <MainPage>
+                  <Component />
+                </MainPage>
+              }
+            />
+          ))}
           {/* <Route render={(props) => this.renderPage(notfound, props)} /> */}
         </Routes>
       </Suspense>

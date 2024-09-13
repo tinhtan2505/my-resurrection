@@ -12,13 +12,7 @@ const headerStyle: React.CSSProperties = {
   backgroundColor: "#4096ff",
 };
 
-const contentStyle: React.CSSProperties = {
-  textAlign: "center",
-  minHeight: 120,
-  lineHeight: "120px",
-  color: "#fff",
-  backgroundColor: "#0958d9",
-};
+const contentStyle: React.CSSProperties = {};
 
 const siderStyle: React.CSSProperties = {
   textAlign: "center",
