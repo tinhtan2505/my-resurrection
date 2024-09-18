@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
 import "./layout.less";
 import MainPage from "./main-layout";
-import { Home } from "../Home";
+import NotFound from "../NotFound";
 
 interface Props {}
 
@@ -20,8 +20,6 @@ interface RouteType {
 class LayoutPage extends Component<Props, State> {
   constructor(props: Props, context: any) {
     super(props);
-
-    // this.routes = Object.values(routes);
   }
   routes: RouteType[] = Object.values(routes);
 
@@ -33,7 +31,6 @@ class LayoutPage extends Component<Props, State> {
             <Route
               key={key}
               path={path}
-              // exact={exact}
               element={
                 <MainPage>
                   <Component />
@@ -41,15 +38,17 @@ class LayoutPage extends Component<Props, State> {
               }
             />
           ))}
-          {/* <Route render={(props) => this.renderPage(notfound, props)} /> */}
+          <Route
+            path="*"
+            element={
+              <MainPage>
+                <NotFound />
+              </MainPage>
+            }
+          />
         </Routes>
       </Suspense>
     );
-  }
-
-  private renderPage(layoutProps: any, props: any) {
-    // Tùy thuộc vào logic render của bạn
-    return <div>Render page here</div>;
   }
 }
 

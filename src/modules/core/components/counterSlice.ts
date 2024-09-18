@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../app/store";
+import { AppThunk, RootState } from "../../../app/store";
 
 // Định nghĩa kiểu cho state
 interface CounterState {
@@ -31,6 +31,14 @@ export const counterSlice = createSlice({
 
 // Action creators được tự động tạo cho mỗi reducer
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+
+export const incrementAsync =
+  (amount: number): AppThunk =>
+  (dispatch) => {
+    setTimeout(() => {
+      dispatch(incrementByAmount(amount));
+    }, 1000);
+  };
 
 export const selectCount = (state: RootState) => state.counter.value;
 

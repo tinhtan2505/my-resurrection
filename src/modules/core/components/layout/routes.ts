@@ -1,22 +1,13 @@
 import About from "../About";
 import Contact from "../Contact";
 import { ComponentType } from "react";
-import { Home } from "../Home";
-
-// const Home = React.lazy(() => import('./../../pages/home/index'));
-// const ProjectNew = React.lazy(() => import('../project/components/project-new/index'));
-// const Login = React.lazy(() => import('./../../pages/account/login'));
-// const Logout = React.lazy(() => import('./../../pages/account/logout'));
-// const ResetPassword = React.lazy(() => import('../account/components/resetPassword'));
-// const Project = React.lazy(() => import('./../../pages/project/index'));
-// const Profile = React.lazy(() => import('../account/updateprofile'));
-// const ProjectDetail = React.lazy(() => import('./../../pages/project/components/view/detail'));
-// const NotFound = React.lazy(() => import('./../../pages/layout/notfound'));
-// const DemoImagechecktool = React.lazy(() => import('../project/components/view/demo-imagechecktool'));
-// const PrivacyPolicy = React.lazy(() => import('../../pages/policy/privacy-policy'));
-// const TermsCondition = React.lazy(() => import('../../pages/policy/terms-conditions'));
-// const ProjectUpload = React.lazy(() => import('../../pages/upload/index'));
-// const Help = React.lazy(() => import('../../pages/help/index'));
+import HomePage from "../Home";
+import Project from "../../../project";
+import Account from "../../../account";
+import CustomerGifts from "../../../customer-gifts";
+import Transactions from "../../../transactions";
+import Payment from "../../../payment";
+import Invoice from "../../../invoice";
 interface Route {
   path: string;
   key: string;
@@ -29,22 +20,50 @@ export const routes = [
   {
     path: "/",
     key: "home",
-    component: Home,
+    component: HomePage,
     title: "Home",
     showHeader: true,
   },
   {
-    path: "/about",
-    key: "about",
-    component: About,
-    title: "About",
+    path: "/project",
+    key: "project",
+    component: Project,
+    title: "Project",
     showHeader: true,
   },
   {
-    path: "/contact",
-    key: "contact",
-    component: Contact,
-    title: "Contact",
+    path: "/gifts",
+    key: "gifts",
+    component: CustomerGifts,
+    title: "gifts",
+    showHeader: true,
+  },
+  {
+    path: "/transactions",
+    key: "transactions",
+    component: Transactions,
+    title: "Transactions",
+    showHeader: true,
+  },
+  {
+    path: "/payment",
+    key: "payment",
+    component: Payment,
+    title: "payment",
+    showHeader: true,
+  },
+  {
+    path: "/invoice",
+    key: "invoice",
+    component: Invoice,
+    title: "invoice",
+    showHeader: true,
+  },
+  {
+    path: "/account",
+    key: "account",
+    component: Account,
+    title: "Account",
     showHeader: true,
   },
 ];

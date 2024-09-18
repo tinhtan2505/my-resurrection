@@ -1,22 +1,39 @@
 import React, { useState } from "react";
-import { Button, Layout } from "antd";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { Button, Layout, Menu, MenuProps } from "antd";
+import {
+  DesktopOutlined,
+  FileOutlined,
+  LaptopOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  NotificationOutlined,
+  PieChartOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { logo } from "../../constants/options";
+import {
+  iconProject,
+  iconGift,
+  iconTransactions,
+  iconPayment,
+  iconInvoice,
+  iconUser,
+} from "../../constants/icons";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const { Header, Footer, Sider, Content } = Layout;
 const headerStyle: React.CSSProperties = {
-  color: "#fff",
+  color: "#000",
   height: 64,
   padding: 0,
   lineHeight: "64px",
-  backgroundColor: "#4096ff",
+  backgroundColor: "#fff",
 };
 
 const contentStyle: React.CSSProperties = {};
 
 const siderStyle: React.CSSProperties = {
-  textAlign: "center",
-  color: "#fff",
   backgroundColor: "#1d1d1d",
 };
 
@@ -35,13 +52,72 @@ interface MainPageProps {
   children: React.ReactNode;
 }
 
+type MenuItem = Required<MenuProps>["items"][number];
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[]
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  } as MenuItem;
+}
+
+const items: MenuItem[] = [
+  getItem("My project", "project", iconProject),
+  getItem("Customer gifts", "gifts", iconGift),
+  getItem("Transactions", "transactions", iconTransactions),
+  getItem("Payment", "payment", iconPayment),
+  getItem("Invoice", "invoice", iconInvoice),
+  getItem("Your account", "account", iconUser),
+  // getItem("User", "sub1", <UserOutlined />, [
+  //   getItem("Tom", "3"),
+  //   getItem("Bill", "4"),
+  //   getItem("Alex", "5"),
+  // ]),
+];
+
+const routeTitles: Record<string, string> = {
+  "/": "Home",
+  "/project": "My Project",
+  "/gifts": "Customer Gifts",
+  "/transactions": "Transactions",
+  "/payment": "Payment",
+  "/invoice": "Invoice",
+  "/account": "Your Account",
+};
+
 const MainPage: React.FC<MainPageProps> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const currentRouteName = routeTitles[location.pathname] || "Dashboard";
+
+  const onMenuClick: MenuProps["onClick"] = (e) => {
+    navigate(`/${e.key}`);
+  };
+
   return (
     <Layout style={layoutStyle}>
       <Sider width="280px" style={siderStyle} collapsed={collapsed}>
-        <div className="logo">{logo}</div>
-        <div className="sider pt-2">SIDER</div>
+        <div className="logo">
+          <Link to="/">{!collapsed ? logo : <></>}</Link>
+        </div>
+        <Menu
+          className="text-base"
+          style={{ backgroundColor: "#1d1d1d" }}
+          theme="dark"
+          defaultSelectedKeys={[""]}
+          mode="inline"
+          items={items}
+          onClick={onMenuClick}
+        />
       </Sider>
       <Layout>
         <Header style={headerStyle}>
@@ -55,6 +131,10 @@ const MainPage: React.FC<MainPageProps> = ({ children }) => {
               height: 64,
             }}
           />
+
+          <span style={{ marginLeft: "16px", fontSize: "16px", color: "#000" }}>
+            {currentRouteName}
+          </span>
         </Header>
         <Content style={contentStyle}>{children}</Content>
         <Footer style={footerStyle}>
