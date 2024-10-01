@@ -8,21 +8,22 @@ import CustomerGifts from "../../../customer-gifts";
 import Transactions from "../../../transactions";
 import Payment from "../../../payment";
 import Invoice from "../../../invoice";
-interface Route {
-  path: string;
-  key: string;
-  component: ComponentType;
-  title: string;
-  showHeader: boolean;
-}
+import Login from "../../../auth/components/login";
 
 export const routes = [
   {
-    path: "/",
+    path: "/home",
     key: "home",
     component: HomePage,
     title: "Home",
     showHeader: true,
+  },
+  {
+    path: "/",
+    key: "login",
+    component: Login,
+    title: "Login",
+    showHeader: false,
   },
   {
     path: "/project",

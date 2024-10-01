@@ -85,6 +85,9 @@ module.exports = (env) => {
     ],
     devServer: {
       historyApiFallback: true, // Serve index.html for all routes
+      port: 8888, // Thêm dòng này để thiết lập cổng 8080
+      open: true, // Tự động mở trình duyệt khi chạy dev server
+      hot: true, // Bật tính năng hot-reload
     },
   };
   return [clientBundleConfig];

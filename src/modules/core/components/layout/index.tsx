@@ -32,9 +32,13 @@ class LayoutPage extends Component<Props, State> {
               key={key}
               path={path}
               element={
-                <MainPage>
+                path === "/" ? (
                   <Component />
-                </MainPage>
+                ) : (
+                  <MainPage>
+                    <Component />
+                  </MainPage>
+                )
               }
             />
           ))}
