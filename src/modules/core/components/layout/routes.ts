@@ -12,14 +12,14 @@ import Login from "../../../auth/components/login";
 
 export const routes = [
   {
-    path: "/home",
+    path: "/",
     key: "home",
     component: HomePage,
     title: "Home",
     showHeader: true,
   },
   {
-    path: "/",
+    path: "/login",
     key: "login",
     component: Login,
     title: "Login",

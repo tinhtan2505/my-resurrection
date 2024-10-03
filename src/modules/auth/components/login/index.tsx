@@ -1,14 +1,18 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import React from "react";
-import { login } from "../../lib/api-service";
+import { isAuthenticated, login } from "../../lib/api-service";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
 const Login: React.FC<Props> = ({}) => {
+  const navigate = useNavigate();
+
   const onFinish = async (values: any) => {
-    console.log("Success:", values);
-    let response = await login(values.username, values.password);
-    console.log("Login: ", response);
+    await login(values.username, values.password);
+    if (isAuthenticated()) {
+      navigate("/");
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -4,6 +4,7 @@ import { routes } from "./routes";
 import "./layout.less";
 import MainPage from "./main-layout";
 import NotFound from "../NotFound";
+import { ProtectedRoute } from "./protected-route";
 
 interface Props {}
 
@@ -32,12 +33,14 @@ class LayoutPage extends Component<Props, State> {
               key={key}
               path={path}
               element={
-                path === "/" ? (
+                path === "/login" ? (
                   <Component />
                 ) : (
-                  <MainPage>
-                    <Component />
-                  </MainPage>
+                  <ProtectedRoute>
+                    <MainPage>
+                      <Component />
+                    </MainPage>
+                  </ProtectedRoute>
                 )
               }
             />

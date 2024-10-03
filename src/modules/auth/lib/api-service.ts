@@ -1,6 +1,6 @@
 const domain = "http://localhost:8080/";
 
-export function login(username: string, password: string) {
+export const login = async (username: string, password: string) => {
   const headers: HeadersInit = {
     "Content-Type": "application/json",
   };
@@ -11,7 +11,19 @@ export function login(username: string, password: string) {
     body: JSON.stringify({ username: username, password: password }),
   };
 
-  console.log(domain + "auth/login");
+  const response = await fetch(domain + "api/auth/login", requestOptions);
+  let statusCode = response.status;
+  const data = await response.json();
 
-  return fetch(domain + "auth/login", requestOptions);
-}
+  if (statusCode === 200) {
+    localStorage.setItem("token", data.token);
+    return data;
+  } else {
+    throw new Error("Đăng nhập thất bại");
+  }
+};
+
+export const isAuthenticated = (): boolean => {
+  const token = localStorage.getItem("token");
+  return !!token; // Trả về true nếu token tồn tại
+};
