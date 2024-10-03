@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button, Layout, Menu, MenuProps } from "antd";
+import { Avatar, Button, Dropdown, Layout, Menu, MenuProps } from "antd";
 import {
   DesktopOutlined,
   FileOutlined,
   LaptopOutlined,
+  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   NotificationOutlined,
@@ -103,6 +104,29 @@ const MainPage: React.FC<MainPageProps> = ({ children }) => {
     navigate(`/${e.key}`);
   };
 
+  const handleLogout = () => {
+    // Xóa token khỏi localStorage/sessionStorage
+    localStorage.removeItem("token"); // Hoặc sessionStorage.removeItem("token")
+
+    // Chuyển hướng về trang đăng nhập
+    navigate("/login");
+  };
+
+  const menu = (
+    <Menu>
+      <Menu.Item
+        key="profile"
+        icon={<UserOutlined />}
+        onClick={() => navigate("/profile")}
+      >
+        Thông tin
+      </Menu.Item>
+      <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
+        Đăng xuất
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <Layout style={layoutStyle}>
       <Sider width="280px" style={siderStyle} collapsed={collapsed}>
@@ -111,13 +135,24 @@ const MainPage: React.FC<MainPageProps> = ({ children }) => {
         </div>
         <Menu
           className="text-base"
-          style={{ backgroundColor: "#1d1d1d" }}
+          style={{ backgroundColor: "#1d1d1d", flex: 1 }}
           theme="dark"
           defaultSelectedKeys={[""]}
           mode="inline"
           items={items}
           onClick={onMenuClick}
         />
+        <Dropdown overlay={menu} trigger={["click"]}>
+          <div className="flex items-center cursor-pointer p-4 border-t text-white">
+            <Avatar
+              style={{ backgroundColor: "#87d068" }}
+              icon={<UserOutlined />}
+            />
+            <span style={{ marginLeft: 8 }}>
+              {!collapsed ? "Nguyễn Quốc Tĩnh" : ""}
+            </span>
+          </div>
+        </Dropdown>
       </Sider>
       <Layout>
         <Header style={headerStyle}>
