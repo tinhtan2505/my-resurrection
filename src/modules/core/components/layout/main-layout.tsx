@@ -26,7 +26,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const { Header, Footer, Sider, Content } = Layout;
 const headerStyle: React.CSSProperties = {
   color: "#000",
-  height: 64,
+  height: 80,
   padding: 0,
   lineHeight: "64px",
   backgroundColor: "#fff",
@@ -98,7 +98,11 @@ const MainPage: React.FC<MainPageProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const currentRouteName = routeTitles[location.pathname] || "Dashboard";
+  var currentRouteName = routeTitles[location.pathname] || "";
+
+  if (currentRouteName === "My Project") {
+    currentRouteName = "Project Management";
+  }
 
   const onMenuClick: MenuProps["onClick"] = (e) => {
     navigate(`/${e.key}`);
@@ -167,14 +171,12 @@ const MainPage: React.FC<MainPageProps> = ({ children }) => {
             }}
           />
 
-          <span style={{ marginLeft: "16px", fontSize: "16px", color: "#000" }}>
-            {currentRouteName}
-          </span>
+          <span className="text-2xl font-bold">{currentRouteName}</span>
         </Header>
         <Content style={contentStyle}>{children}</Content>
-        <Footer style={footerStyle}>
+        {/* <Footer style={footerStyle}>
           <div className="pl-2 text-green-400">Hello world!</div>
-        </Footer>
+        </Footer> */}
       </Layout>
     </Layout>
   );
